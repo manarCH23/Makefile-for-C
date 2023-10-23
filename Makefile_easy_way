@@ -1,3 +1,6 @@
+#target : required files to build the target
+	# command
+
 launch: program
 	./program
 
