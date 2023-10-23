@@ -1,15 +1,30 @@
-launch: program
-	./program
+#define the C compiler
+CC	=	gcc
 
-program: program.o weatherstats.o
-	gcc -std=c11 -Wall -fmax-errors=10 -Wextra program.o weatherstats.o -o program
+#define the compiler flags
+CFLAGS	=	-std=c11 -Wall -fmax-errors=10 -Wextra
 
-program.o: program.c weatherstats.h
-	gcc -std=c11 -Wall -fmax-errors=10 -Wextra -c program.c -o program.o
-	
-weatherstats.o: weatherstats.c
-	gcc -std=c11 -Wall -fmax-errors=10 -Wextra -c weatherstats.c -o weatherstats.o
+#define libaries path in addition to /usr/lib
+LFLAGS	=	
 
-clean:
-	rm -f program *.o
+#define libaries to use
+libaries	=	
+
+#define the object files needed in the project
+OBJFILES	=	program.o weatherstats.o
+
+#defien the executable file
+MAIN	=	program
+
+#all the below is generic
+
+all:	$(MAIN)
+$(MAIN):	$(OBJFILES)
+	$(CC) $(CFLAGS) -o $(MAIN) $(OBJFILES)
+
+%.o:	%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:	
+	rm -f $(OBJFILES) $(MAIN)
 	
